@@ -1,184 +1,1414 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+/*
+ * App.css — Estilos de todos los componentes y páginas de Áurea
+ * Organizado por secciones. Cada clase está explicada en docs/GUIA_CSS.md.
+ * Convención: bloque__elemento--variante, en español (ej. producto-card__titulo).
+ */
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-}
+/* =========================================================
+   1. ESTRUCTURA GENERAL
+   ========================================================= */
 
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
-}
-
-#center {
+.app {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+  min-height: 100vh;
 }
 
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+.app__main {
+  flex: 1;
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
-}
-
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
-}
-
-.ticks {
-  position: relative;
+/* Contenedor estándar de cada página */
+.pagina {
   width: 100%;
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+  padding: var(--esp-5) var(--esp-3) var(--esp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+.pagina__encabezado {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+}
+
+.pagina__titulo {
+  font-size: clamp(36px, 4vw, 52px);
+}
+
+.pagina__subtitulo {
+  color: var(--texto-2);
+  max-width: 560px;
+}
+
+/* Dos columnas que se apilan en celular (contenido + resumen) */
+.dos-columnas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-5);
+  align-items: flex-start;
+}
+
+.dos-columnas__principal {
+  flex: 999 1 520px;
+  min-width: 0;
+}
+
+.dos-columnas__lateral {
+  flex: 1 1 300px;
+}
+
+/* =========================================================
+   2. HEADER Y FOOTER
+   ========================================================= */
+
+.header {
+  background: var(--tinta);
+  border-bottom: 1px solid var(--oro);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header__contenido {
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+  padding: var(--esp-2) var(--esp-3);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-2) var(--esp-4);
+}
+
+.header__logo {
+  font-family: var(--fuente-titulo);
+  font-size: 30px;
+  letter-spacing: 0.18em;
+  color: var(--marfil);
+  text-decoration: none;
+}
+
+.header__logo:hover {
+  color: var(--marfil);
+}
+
+.header__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--esp-1) var(--esp-3);
+}
+
+.header__enlace {
+  color: var(--texto-sobre-tinta);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: var(--esp-1) 0;
+  border-bottom: 1px solid transparent;
+  transition: color var(--transicion), border-color var(--transicion);
+}
+
+.header__enlace:hover,
+.header__enlace--activo {
+  color: var(--oro);
+  border-bottom-color: var(--oro);
+}
+
+/* Botón del enlace al carrito con contador */
+.header__carrito {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-1);
+  color: var(--oro);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--oro);
+  padding: 10px var(--esp-2);
+  min-height: 44px;
+}
+
+.header__carrito:hover {
+  background: var(--oro);
+  color: var(--tinta);
+}
+
+.header__contador {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 11px;
+  background: var(--oro);
+  color: var(--tinta);
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__carrito:hover .header__contador {
+  background: var(--tinta);
+  color: var(--oro);
+}
+
+/* Botón de texto para "Cerrar sesión" dentro del header */
+.header__boton {
+  background: none;
+  border: 0;
+  padding: var(--esp-1) 0;
+  cursor: pointer;
+  color: var(--texto-sobre-tinta);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header__boton:hover {
+  color: var(--oro);
+}
+
+.footer {
+  background: var(--tinta);
+  color: #cfc4b0;
+  margin-top: auto;
+}
+
+.footer__contenido {
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+  padding: var(--esp-4) var(--esp-3);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--esp-2);
+  font-size: 13px;
+}
+
+.footer__logo {
+  font-family: var(--fuente-titulo);
+  font-size: 20px;
+  letter-spacing: 0.18em;
+  color: var(--marfil);
+}
+
+/* =========================================================
+   3. BOTONES
+   ========================================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-1);
+  min-height: 48px;
+  padding: 14px 28px;
+  border: 1px solid var(--tinta);
+  border-radius: var(--radio);
+  background: var(--tinta);
+  color: var(--marfil);
+  font-family: var(--fuente-texto);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--transicion), color var(--transicion), border-color var(--transicion);
+}
+
+.btn:hover {
+  background: #2a2420;
+  color: var(--marfil);
+}
+
+/* Contorno: acciones secundarias (Ver detalle, Cancelar) */
+.btn--secundario {
+  background: transparent;
+  color: var(--tinta);
+}
+
+.btn--secundario:hover {
+  background: var(--tinta);
+  color: var(--marfil);
+}
+
+/* Dorado: solo la acción final de la pantalla (Confirmar pedido) */
+.btn--dorado {
+  background: var(--oro);
+  border-color: var(--oro);
+  color: var(--tinta);
+}
+
+.btn--dorado:hover {
+  background: #c29d63;
+  color: var(--tinta);
+}
+
+/* Acciones destructivas (Eliminar, Cancelar pedido) */
+.btn--peligro {
+  background: transparent;
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.btn--peligro:hover {
+  background: var(--error);
+  color: var(--marfil);
+}
+
+/* Botón claro para usar sobre fondo tinta */
+.btn--claro {
+  background: var(--marfil);
+  border-color: var(--marfil);
+  color: var(--tinta);
+}
+
+.btn--claro:hover {
+  background: #fff;
+  color: var(--tinta);
+}
+
+.btn--chico {
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 12px;
+}
+
+/* Ocupa todo el ancho de su contenedor */
+.btn--bloque {
+  width: 100%;
+}
+
+/* Deshabilitado: aplica solo con el atributo disabled */
+.btn:disabled,
+.btn:disabled:hover {
+  background: var(--deshabilitado);
+  border-color: var(--deshabilitado);
+  color: var(--texto-2);
+  cursor: not-allowed;
+}
+
+/* Enlace con aspecto de texto (Eliminar, Seguir comprando) */
+.btn-texto {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--oro-texto);
+  text-decoration: underline;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-texto:hover {
+  color: var(--borgona);
+}
+
+.btn-texto--peligro {
+  color: var(--error);
+}
+
+/* =========================================================
+   4. FORMULARIOS
+   ========================================================= */
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+  max-width: 640px;
+}
+
+/* Campos en 2 columnas que pasan a 1 en celular */
+.formulario__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--esp-3) var(--esp-2);
+}
+
+.formulario__grid .campo--completo {
+  grid-column: 1 / -1;
+}
+
+.formulario__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2);
+}
+
+/* Mensaje general del formulario (error de la API o éxito) */
+.formulario__mensaje {
+  padding: 12px var(--esp-2);
+  border-left: 2px solid var(--error);
+  background: var(--error-claro);
+  color: var(--error);
+  font-size: 14px;
+}
+
+.formulario__mensaje--exito {
+  border-left-color: var(--exito);
+  background: var(--exito-claro);
+  color: var(--exito);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+}
+
+.campo__label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.campo__input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px var(--esp-2);
+  border: 1px solid var(--borde-input);
+  border-radius: var(--radio);
+  background: var(--papel);
+  font-size: 15px;
+  transition: border-color var(--transicion);
+}
+
+.campo__input:focus {
+  border-color: var(--oro);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(176, 141, 87, 0.3);
+}
+
+.campo__input::placeholder {
+  color: #8c8273;
+}
+
+textarea.campo__input {
+  min-height: 112px;
+  resize: vertical;
+}
+
+.campo__input--error {
+  border-color: var(--error);
+}
+
+.campo__error {
+  font-size: 13px;
+  color: var(--error);
+}
+
+.campo__ayuda {
+  font-size: 13px;
+  color: var(--texto-2);
+}
+
+/* Checkbox o radio con su texto al lado */
+.campo--check {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+}
+
+.campo--check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--tinta);
+}
+
+/* =========================================================
+   5. MENSAJES (cargando, error, sin datos)
+   ========================================================= */
+
+.mensaje {
+  border: 1px solid var(--linea);
+  background: var(--papel);
+  padding: var(--esp-5) var(--esp-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-2);
+  text-align: center;
+}
+
+.mensaje__titulo {
+  font-family: var(--fuente-titulo);
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.mensaje__texto {
+  color: var(--texto-2);
+  max-width: 420px;
+}
+
+.mensaje--error {
+  border-color: var(--error);
+}
+
+.mensaje--error .mensaje__titulo {
+  color: var(--error);
+}
+
+/* Línea dorada arriba del mensaje de vacío */
+.mensaje--vacio::before {
+  content: "";
+  width: 120px;
+  height: 1px;
+  background: var(--oro);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--linea);
+  border-top-color: var(--oro);
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   6. CATÁLOGO, FILTROS Y TARJETAS
+   ========================================================= */
+
+.catalogo__encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--esp-4);
+}
+
+.catalogo__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  flex: 1 1 480px;
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--esp-2);
+  padding-bottom: var(--esp-3);
+  border-bottom: 1px solid var(--linea);
+}
+
+.filtros__buscador {
+  flex: 0 1 360px;
+}
+
+.filtros__categorias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.filtros__chip {
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 1px solid var(--borde-input);
+  border-radius: var(--radio);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transicion), color var(--transicion);
+}
+
+.filtros__chip:hover {
+  border-color: var(--tinta);
+}
+
+.filtros__chip--activo {
+  background: var(--tinta);
+  border-color: var(--tinta);
+  color: var(--marfil);
+}
+
+.filtros__conteo {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--texto-2);
+}
+
+/* Cuadrícula de tarjetas: 4 → 3 → 2 → 1 columnas sola */
+.grid-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--esp-4);
+}
+
+.producto-card {
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color var(--transicion);
+}
+
+.producto-card:hover {
+  border-color: var(--oro);
+}
+
+.producto-card__portada {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 4;
+  background: var(--tinta);
+  overflow: hidden;
+}
+
+.producto-card__imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Sello "Agotado" sobre la portada */
+.producto-card__sello {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 10px;
+  background: var(--borgona);
+  color: var(--marfil);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.producto-card__categoria {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--oro-texto);
+}
+
+.producto-card__titulo {
+  font-family: var(--fuente-titulo);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.producto-card__titulo a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.producto-card__descripcion {
+  font-size: 13px;
+  color: var(--texto-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.producto-card__precio {
+  margin-top: auto;
+  font-family: var(--fuente-titulo);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--borgona);
+}
+
+/* El botón de la tarjeta es más compacto para que el texto quepa en una línea */
+.producto-card .btn {
+  padding: 12px 10px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+/* =========================================================
+   7. DETALLE DE LIBRO Y CANTIDAD
+   ========================================================= */
+
+.detalle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-6);
+  align-items: flex-start;
+}
+
+.detalle__portada {
+  flex: 1 1 340px;
+  max-width: 460px;
+  aspect-ratio: 3 / 4;
+  background: var(--tinta);
+  overflow: hidden;
+}
+
+.detalle__portada img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detalle__info {
+  flex: 1 1 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detalle__titulo {
+  font-size: clamp(36px, 4vw, 52px);
+}
+
+.detalle__precio {
+  font-family: var(--fuente-titulo);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--borgona);
+}
+
+.detalle__stock {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--exito);
+}
+
+.detalle__stock--agotado {
+  color: var(--error);
+}
+
+.detalle__descripcion {
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+.detalle__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--esp-2);
+}
+
+.detalle__acciones .btn {
+  flex: 1 1 220px;
+}
+
+/* Selector − cantidad + */
+.cantidad {
+  display: inline-flex;
+  align-items: stretch;
+}
+
+.cantidad__boton {
+  width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--borde-input);
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.cantidad__boton:hover:not(:disabled) {
+  background: var(--tinta);
+  color: var(--marfil);
+}
+
+.cantidad__boton:disabled {
+  color: #b5ac9f;
+  cursor: not-allowed;
+}
+
+.cantidad__valor {
+  width: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--borde-input);
+  border-bottom: 1px solid var(--borde-input);
+  font-size: 15px;
+}
+
+/* =========================================================
+   8. CARRITO Y RESUMEN DE COMPRA
+   ========================================================= */
+
+.carrito__lista {
+  border-top: 1px solid var(--linea);
+}
+
+.carrito-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--esp-3);
+  padding: var(--esp-3) 0;
+  border-bottom: 1px solid var(--linea);
+}
+
+.carrito-item__portada {
+  width: 84px;
+  aspect-ratio: 2 / 3;
+  background: var(--tinta);
+  object-fit: cover;
+}
+
+.carrito-item__info {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.carrito-item__titulo {
+  font-family: var(--fuente-titulo);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.carrito-item__meta {
+  font-size: 13px;
+  color: var(--texto-2);
+}
+
+.carrito-item__subtotal {
+  width: 120px;
+  text-align: right;
+  font-family: var(--fuente-titulo);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--borgona);
+}
+
+/* Caja oscura con subtotal, envío y total */
+.resumen {
+  background: var(--tinta);
+  color: var(--marfil);
+  padding: var(--esp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  position: sticky;
+  top: 100px;
+}
+
+.resumen__titulo {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--oro);
+}
+
+.resumen__fila {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+}
+
+.resumen__fila--gratis span:last-child {
+  color: var(--oro);
+}
+
+.resumen__aviso {
+  border: 1px solid var(--texto-2);
+  padding: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #cfc4b0;
+}
+
+.resumen__aviso strong {
+  color: var(--oro);
+}
+
+.resumen__separador {
+  height: 1px;
+  background: var(--oro);
+}
+
+.resumen__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.resumen__total-valor {
+  font-family: var(--fuente-titulo);
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.resumen .btn-texto {
+  align-self: center;
+  color: var(--oro);
+}
+
+/* =========================================================
+   9. CHECKOUT, DIRECCIONES Y OPCIONES
+   ========================================================= */
+
+.checkout__seccion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  padding-bottom: var(--esp-4);
+  border-bottom: 1px solid var(--linea);
+}
+
+.checkout__seccion + .checkout__seccion {
+  padding-top: var(--esp-4);
+}
+
+/* Lista de tarjetas seleccionables (direcciones o método de pago) */
+.opciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--esp-2);
+}
+
+/* Se usa en un <label> que contiene un input radio */
+.opcion {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: var(--esp-2);
+  border: 1px solid var(--linea);
+  background: var(--papel);
+  cursor: pointer;
+  transition: border-color var(--transicion);
+}
+
+.opcion:hover {
+  border-color: var(--borde-input);
+}
+
+.opcion input {
+  margin-top: 4px;
+  accent-color: var(--tinta);
+}
+
+.opcion--seleccionada {
+  border-color: var(--oro);
+  box-shadow: inset 0 0 0 1px var(--oro);
+}
+
+.opcion__titulo {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.opcion__texto {
+  font-size: 13px;
+  color: var(--texto-2);
+}
+
+.direcciones__lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--esp-3);
+}
+
+.direccion-card {
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  padding: var(--esp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+}
+
+.direccion-card--predeterminada {
+  border-color: var(--oro);
+}
+
+.direccion-card__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2);
+  margin-top: var(--esp-1);
+}
+
+/* Etiqueta chica tipo "Predeterminada" */
+.insignia {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border: 1px solid var(--oro);
+  background: var(--oro-claro);
+  color: var(--oro-texto);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   10. PEDIDOS Y ESTADOS
+   ========================================================= */
+
+.pedidos__lista {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--linea);
+}
+
+.pedido-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-2) var(--esp-3);
+  padding: 20px 0;
+  border-bottom: 1px solid var(--linea);
+  color: inherit;
+  text-decoration: none;
+}
+
+.pedido-card:hover {
+  background: var(--papel);
+  color: inherit;
+}
+
+.pedido-card__folio {
+  font-family: var(--fuente-titulo);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.pedido-card__fecha {
+  font-size: 13px;
+  color: var(--texto-2);
+}
+
+.pedido-card__total {
+  font-family: var(--fuente-titulo);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--borgona);
+}
+
+.pedido-detalle__datos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--esp-3);
+}
+
+.estado {
+  display: inline-block;
+  padding: 5px 12px;
+  border: 1px solid;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.estado--pendiente {
+  color: var(--oro-texto);
+  border-color: var(--oro);
+  background: var(--oro-claro);
+}
+
+.estado--pagado {
+  color: var(--tinta);
+  border-color: var(--tinta);
+  background: transparent;
+}
+
+.estado--enviado {
+  color: var(--azul);
+  border-color: var(--azul);
+  background: var(--azul-claro);
+}
+
+.estado--entregado {
+  color: var(--exito);
+  border-color: var(--exito);
+  background: var(--exito-claro);
+}
+
+.estado--cancelado {
+  color: var(--error);
+  border-color: var(--error);
+  background: var(--error-claro);
+}
+
+/* =========================================================
+   11. TABLAS
+   ========================================================= */
+
+/* Envuelve cada tabla para que haga scroll horizontal en celular */
+.tabla-contenedor {
+  overflow-x: auto;
+  background: var(--papel);
+  border: 1px solid var(--linea);
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tabla th {
+  text-align: left;
+  padding: 12px var(--esp-2);
+  border-bottom: 1px solid var(--oro);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--texto-2);
+  white-space: nowrap;
+}
+
+.tabla td {
+  padding: 14px var(--esp-2);
+  border-bottom: 1px solid var(--linea);
+  vertical-align: middle;
+}
+
+.tabla tr:last-child td {
+  border-bottom: 0;
+}
+
+.tabla__numero {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.tabla__acciones {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+/* Fila de un producto inactivo */
+.tabla__fila--inactiva td {
+  color: var(--texto-2);
+  text-decoration: line-through;
+}
+
+/* =========================================================
+   12. LOGIN, REGISTRO Y 404
+   ========================================================= */
+
+.auth {
+  min-height: calc(100vh - 160px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--esp-5) var(--esp-3);
+}
+
+.auth__tarjeta {
+  width: 100%;
+  max-width: 460px;
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  padding: var(--esp-5) var(--esp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+}
+
+.auth__tarjeta--ancha {
+  max-width: 640px;
+}
+
+.auth__titulo {
+  font-size: 40px;
+}
+
+.auth__pie {
+  font-size: 14px;
+  color: var(--texto-2);
+  text-align: center;
+}
+
+.no-encontrado {
+  min-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-2);
+  text-align: center;
+  padding: var(--esp-5) var(--esp-3);
+}
+
+.no-encontrado__codigo {
+  font-family: var(--fuente-titulo);
+  font-size: clamp(96px, 18vw, 160px);
+  line-height: 1;
+  color: var(--oro);
+}
+
+/* =========================================================
+   13. PANEL DE ADMINISTRACIÓN
+   ========================================================= */
+
+.admin {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+}
+
+.admin-menu {
+  flex: 1 1 220px;
+  max-width: 260px;
+  background: var(--tinta);
+  padding: var(--esp-4) var(--esp-2);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-menu__logo {
+  font-family: var(--fuente-titulo);
+  font-size: 28px;
+  letter-spacing: 0.18em;
+  color: var(--marfil);
+  text-decoration: none;
+  padding: 0 var(--esp-2);
+}
+
+.admin-menu__subtitulo {
+  padding: 0 var(--esp-2) var(--esp-3);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--oro);
+}
+
+.admin-menu__enlace {
+  color: var(--texto-sobre-tinta);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 12px var(--esp-2);
+  border-left: 2px solid transparent;
+  background: none;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.admin-menu__enlace:hover,
+.admin-menu__enlace--activo {
+  color: var(--oro);
+  border-left-color: var(--oro);
+}
+
+.admin-menu__enlace--salir {
+  margin-top: var(--esp-3);
+  color: #cfc4b0;
+}
+
+.admin__contenido {
+  flex: 999 1 560px;
+  min-width: 0;
+  padding: var(--esp-5) var(--esp-5) var(--esp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-5);
+}
+
+.admin__encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--esp-2);
+}
+
+/* Fila de filtros o botones arriba de una tabla */
+.barra-herramientas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--esp-2);
+}
+
+.barra-herramientas .campo {
+  flex-direction: row;
+  align-items: center;
+}
+
+.barra-herramientas .campo__input {
+  width: auto;
+  min-width: 180px;
+}
+
+/* Tarjetas de indicadores del resumen */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--esp-3);
+}
+
+.kpi {
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  padding: var(--esp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+}
+
+.kpi__etiqueta {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--oro-texto);
+}
+
+.kpi__valor {
+  font-family: var(--fuente-titulo);
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.kpi--alerta {
+  border-color: var(--error);
+}
+
+.kpi--alerta .kpi__etiqueta,
+.kpi--alerta .kpi__valor {
+  color: var(--error);
+}
+
+/* Panel para mostrar un formulario de admin (crear o editar) */
+.panel {
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  padding: var(--esp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-3);
+}
+
+/* =========================================================
+   14. RESPONSIVO
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .pagina {
+    padding: var(--esp-4) var(--esp-2) var(--esp-5);
   }
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
+  .header {
+    position: static;
   }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+
+  .header__contenido {
+    padding: var(--esp-2);
+  }
+
+  .header__nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .admin-menu {
+    max-width: none;
+    flex-basis: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: var(--esp-2);
+  }
+
+  .admin-menu__subtitulo {
+    display: none;
+  }
+
+  .admin-menu__enlace {
+    border-left: 0;
+    border-bottom: 2px solid transparent;
+    padding: 10px 12px;
+  }
+
+  .admin-menu__enlace:hover,
+  .admin-menu__enlace--activo {
+    border-bottom-color: var(--oro);
+  }
+
+  .admin-menu__enlace--salir {
+    margin-top: 0;
+  }
+
+  .admin__contenido {
+    padding: var(--esp-4) var(--esp-2) var(--esp-5);
+  }
+
+  .resumen {
+    position: static;
+  }
+
+  .filtros__buscador {
+    flex-basis: 100%;
+  }
+
+  .filtros__conteo {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .formulario__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .auth__tarjeta {
+    padding: var(--esp-4) var(--esp-3);
+  }
+
+  .carrito-item__subtotal {
+    width: auto;
+    margin-left: auto;
+  }
+
+  .grid-productos {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--esp-2);
+  }
+
+  .producto-card {
+    padding: 12px;
+  }
+
+  .producto-card__titulo {
+    font-size: 18px;
+  }
+
+  .producto-card .btn {
+    min-height: 44px;
+    padding: 10px 6px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
   }
 }
