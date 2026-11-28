@@ -9,5 +9,11 @@
  *
  * Módulo / dueño: Catálogo y carrito
  *
- * Este archivo solo está documentado: el código lo escribe el dueño del módulo.
  */
+
+// PLACEHOLDER de la parte 1 para que las rutas compilen: el dueño del módulo reemplaza esto.
+function CarritoPage() {
+  return <p className="texto-secundario">Carrito: pendiente.</p>;
+}
+
+export default CarritoPage;

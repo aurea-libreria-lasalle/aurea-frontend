@@ -9,5 +9,11 @@
  *
  * Módulo / dueño: Compra
  *
- * Este archivo solo está documentado: el código lo escribe el dueño del módulo.
  */
+
+// PLACEHOLDER de la parte 1 para que las rutas compilen: el dueño del módulo reemplaza esto.
+function MisPedidosPage() {
+  return <p className="texto-secundario">MisPedidos: pendiente.</p>;
+}
+
+export default MisPedidosPage;

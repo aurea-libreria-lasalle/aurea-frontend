@@ -13,5 +13,11 @@
  *
  * Módulo / dueño: Administración
  *
- * Este archivo solo está documentado: el código lo escribe el dueño del módulo.
  */
+
+// PLACEHOLDER de la parte 1 para que las rutas compilen: el dueño del módulo reemplaza esto.
+function AdminPedidosPage() {
+  return <p className="texto-secundario">AdminPedidos: pendiente.</p>;
+}
+
+export default AdminPedidosPage;

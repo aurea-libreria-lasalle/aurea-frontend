@@ -6,6 +6,20 @@
  * Ruta: *
  *
  * Módulo / dueño: Sesión
- *
- * Este archivo solo está documentado: el código lo escribe el dueño del módulo.
  */
+
+import { Link } from "react-router-dom";
+
+function NotFoundPage() {
+  return (
+    <div className="no-encontrado">
+      <p className="no-encontrado__codigo">404</p>
+      <h2>Esta página no existe</h2>
+      <Link to="/catalogo" className="btn btn--secundario">
+        Volver al catálogo
+      </Link>
+    </div>
+  );
+}
+
+export default NotFoundPage;

@@ -12,5 +12,11 @@
  *
  * Módulo / dueño: Compra
  *
- * Este archivo solo está documentado: el código lo escribe el dueño del módulo.
  */
+
+// PLACEHOLDER de la parte 1 para que las rutas compilen: el dueño del módulo reemplaza esto.
+function CheckoutPage() {
+  return <p className="texto-secundario">Checkout: pendiente.</p>;
+}
+
+export default CheckoutPage;
