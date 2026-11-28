@@ -8,6 +8,7 @@ Documentación del equipo. Antes de programar algo nuevo, revisa estos archivos.
 | `Guia_Git_GitHub.pdf` | Comandos de Git y flujo con ramas y pull requests |
 | `Canvas_Estilo_Visual_Aurea.pdf` | Guía de estilo visual y pantallas de referencia |
 | `GUIA_CSS.md` | Qué clase CSS va en cada componente (los estilos ya están hechos) |
+| `ESTADO.md` | Avance del equipo: qué está hecho, rutas, consumo de la API y pendientes |
 | `canvas/` | Imágenes PNG de cómo debe verse cada pantalla, en computadora y celular |
 
 Si el código y estos documentos no coinciden, se corrige uno de los dos con un PR.
